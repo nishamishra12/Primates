@@ -84,7 +84,26 @@ public interface SanctuaryInterface {
    * @param name this parameter takes the name of the monkey
    * @return primate object for a unique monkey name.
    * @throws IllegalArgumentException when name entered is not present in the sanctuary.
-   * @throws NullPointerException when name passed is null.
    */
-  public Primate findMonkey(String name) throws IllegalArgumentException, NullPointerException;
+  public Primate findMonkey(String name) throws IllegalArgumentException;
+
+  /**
+   * This method updates the size of enclosure and isolation
+   * @param isolationSize takes isolation size
+   * @param enclosureSize
+   * @throws IllegalArgumentException when a non-positive number is entered as housing size
+   */
+  public void updateHousingSize(int isolationSize, int enclosureSize) throws IllegalArgumentException;
+
+  /**
+   * This method returns isolation housing object
+   * @return housing object
+   */
+  public Housing getIsolation();
+
+  /**
+   * This method returns enclosure housing object
+   * @return housing object
+   */
+  public Housing getEnclosure();
 }

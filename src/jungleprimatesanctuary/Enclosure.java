@@ -105,4 +105,21 @@ public class Enclosure implements Housing {
       }
     }
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getHousingSize() {
+    return m;
+  }
+
+  /**
+   *
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHousingSize(int m) {
+    this.m = m;
+  }
 }

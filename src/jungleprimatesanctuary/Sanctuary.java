@@ -9,19 +9,69 @@ import java.util.Map;
 import java.util.StringJoiner;
 import java.util.TreeMap;
 
-public class Sanctuary implements SanctuaryInterface{
+public class Sanctuary implements SanctuaryInterface {
 
   private final MonkeyFactory monkeyFactory;
-  private final Housing isolation;
-  private final Housing enclosure;
+  private Housing isolation;
+  private Housing enclosure;
   private Primate primate;
 
-  public Sanctuary(MonkeyFactory monkeyFactory, int isoSize, int enclSize) {
+  /**
+   * Constructs a Sanctuary which houses primates of different species
+   *
+   * @param monkeyFactory this parameter takes the monkey object
+   * @param isolationSize this parameter takes the isolation size
+   * @param enclosureSize this parameter takes the enclosure size
+   * @throws IllegalArgumentException when a non-positive number is entered as housing size
+   */
+  public Sanctuary(MonkeyFactory monkeyFactory, int isolationSize, int enclosureSize) throws IllegalArgumentException {
 
     this.monkeyFactory = monkeyFactory;
-    this.isolation = new Isolation(isoSize);
-    this.enclosure = new Enclosure(enclSize);
+    if (isolationSize <= 0) {
+      throw new IllegalArgumentException("Size of the isolation should be a positive number");
+    }
+    if (enclosureSize <= 0) {
+      throw new IllegalArgumentException("Size of the enclosure should be a positive number");
+    }
+    this.isolation = new Isolation(isolationSize);
+    this.enclosure = new Enclosure(enclosureSize);
   }
+
+  /**
+   * This method updates the size of enclosure and isolation
+   *
+   * @param isolationSize takes isolation size
+   * @param enclosureSize
+   * @throws IllegalArgumentException when a non-positive number is entered as housing size
+   */
+  @Override
+  public void updateHousingSize(int isolationSize, int enclosureSize) throws IllegalArgumentException {
+    if (isolationSize <= 0) {
+      throw new IllegalArgumentException("Size of the isolation should be a positive number");
+    }
+    if (enclosureSize <= 0) {
+      throw new IllegalArgumentException("Size of the enclosure should be a positive number");
+    }
+    isolation.setHousingSize(isolationSize);
+    enclosure.setHousingSize(enclosureSize);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Housing getIsolation() {
+    return this.isolation;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Housing getEnclosure() {
+    return this.enclosure;
+  }
+
 
   /**
    * This method creates a new primate object and adds it to the isolation list.
@@ -42,8 +92,26 @@ public class Sanctuary implements SanctuaryInterface{
   public void createNewPrimate(String name, String size, String sex, int age, double weight
           , String favFood, int foodReq, int spaceReq, String speciesType) throws IllegalArgumentException {
     List<Primate> arr = entireHousingList();
-    if (name ==null) {
+    if (name == null) {
       throw new IllegalArgumentException("Name of the monkey cannot be null");
+    }
+    if (age <= 0 || weight <= 0) {
+      throw new IllegalArgumentException("Age or weight of the monkey should be a positive number");
+    }
+    if (size == null) {
+      throw new IllegalArgumentException("Size of monkey cannot be null");
+    }
+    if (sex == null) {
+      throw new IllegalArgumentException("Sex of monkey cannot be null");
+    }
+    if (favFood == null) {
+      throw new IllegalArgumentException("Favorite food of monkey cannot be null");
+    }
+    if (foodReq <= 0) {
+      throw new IllegalArgumentException("Favorite requirement of monkey should be positive");
+    }
+    if (spaceReq <= 0) {
+      throw new IllegalArgumentException("Space requirement of monkey should be positive");
     }
     for (Primate value : arr) {
       if (value.getName().equals(name)) {
@@ -156,6 +224,7 @@ public class Sanctuary implements SanctuaryInterface{
   /**
    * This method provides a shopping list of the favorite foods of the primates
    * along with the quantity required.
+   *
    * @return favorite food and quantity of all the favorite foods.
    */
   @Override
@@ -180,6 +249,7 @@ public class Sanctuary implements SanctuaryInterface{
   /**
    * This method provides the list of all species in the sanctuary in alphabetical order
    * along with their respective housing.
+   *
    * @return alphabetical list of the species.
    */
   @Override
@@ -189,6 +259,7 @@ public class Sanctuary implements SanctuaryInterface{
 
   /**
    * This method looks up a particular species and provides the housing details for that species.
+   *
    * @param species this parameter takes the species name
    * @return the list of species along with housing details and cage numbers
    * @throws IllegalArgumentException when the given species is not present.
@@ -206,6 +277,7 @@ public class Sanctuary implements SanctuaryInterface{
 
   /**
    * This method is a helper method which provides housing of all the species
+   *
    * @param speciesKey this parameter takes the list of species present
    * @return the list of species with housing details.
    */
@@ -240,6 +312,7 @@ public class Sanctuary implements SanctuaryInterface{
 
   /**
    * This method is a helper method which provides unique list of species.
+   *
    * @return unique list of species
    */
   private String[] uniqueListOfSpecies() {
@@ -255,6 +328,7 @@ public class Sanctuary implements SanctuaryInterface{
 
   /**
    * This method is a helper method which gives list of total primates in the sanctuary
+   *
    * @return total list of primates in enclosure plus isolation.
    */
   private List<Primate> entireHousingList() {
@@ -271,15 +345,16 @@ public class Sanctuary implements SanctuaryInterface{
 
   /**
    * This method provides the entire primate object for any monkey by the monkey name.
+   *
    * @param name this parameter takes the name of the monkey
    * @return primate object for a unique monkey name.
    * @throws IllegalArgumentException when name entered is not present in the sanctuary.
-   * @throws NullPointerException when name passed is null.
+   * @throws NullPointerException     when name passed is null.
    */
   @Override
-  public Primate findMonkey(String name) throws IllegalArgumentException, NullPointerException {
+  public Primate findMonkey(String name) throws IllegalArgumentException {
     if (name == null) {
-      throw new NullPointerException("Monkey name cannot be null");
+      throw new IllegalArgumentException("Monkey name cannot be null");
     }
     List<Primate> arr = entireHousingList();
     int count = 0;
@@ -294,5 +369,12 @@ public class Sanctuary implements SanctuaryInterface{
       throw new IllegalArgumentException("Monkey with this name doesn't exist in sanctuary");
     }
     return primate;
+  }
+
+  private String[] getMonkeyHousing(String name) {
+    if (name == null) {
+      throw new IllegalArgumentException("Monkey name cannot be null");
+    }
+    return null;
   }
 }

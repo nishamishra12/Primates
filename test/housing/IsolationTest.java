@@ -108,4 +108,15 @@ public class IsolationTest {
             , Size.MEDIUM.getSpaceRequirement(), "Drill");
      isolation.removeMonkey(p);
     }
+
+  @Test
+  public void getHousingSize() {
+    assertEquals(5,isolation.getHousingSize());
+  }
+
+  @Test
+  public void setHousingSize() {
+    isolation.setHousingSize(10);
+    assertEquals(10,isolation.getHousingSize());
+  }
   }

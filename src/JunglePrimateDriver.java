@@ -13,7 +13,7 @@ public class JunglePrimateDriver {
 
   public static void main(String[] args) {
 
-    SanctuaryInterface sanctuary = new Sanctuary(new MonkeyFactory(), 7, 4);
+    SanctuaryInterface sanctuary = new Sanctuary(new MonkeyFactory(),10,7);
 
     /**create new monkeys, new monkeys will always go to Isolation.
      * Enter housing values null as user doesn't know the type of housing or cage no

@@ -9,7 +9,8 @@ import java.util.List;
 public class Isolation implements Housing {
 
   private final List<Primate> isolationList = new ArrayList<Primate>();
-  private final int n;
+
+  private int n;
 
   public Isolation(int n) {
     this.n = n;
@@ -87,4 +88,22 @@ public class Isolation implements Housing {
       }
     }
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getHousingSize() {
+    return n;
+  }
+
+  /**
+   *
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHousingSize(int m) {
+    this.n = m;
+  }
+
 }

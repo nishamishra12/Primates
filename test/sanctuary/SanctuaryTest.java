@@ -44,6 +44,16 @@ public class SanctuaryTest {
             , Size.SMALL.getSpaceRequirement(), "Drill");
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testForNegativeIsolationSize() {
+    new Sanctuary(new MonkeyFactory(), -7, 4);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testForNegativeEnclosureSize() {
+    new Sanctuary(new MonkeyFactory(), 7, -4);
+  }
+
   /**
    * Test to check new primate object creation and if it is moved directly to isolation.
    */
@@ -52,10 +62,10 @@ public class SanctuaryTest {
     sanctuary.createNewPrimate("Jimmy", Size.SMALL.getSizeDescription(), Sex.FEMALE.getSex()
             , 40, 100, Food.EGGS.foodName(), Size.SMALL.getFoodQuantity()
             , Size.SMALL.getSpaceRequirement(), "Drill");
-    assertEquals("Isolation",sanctuary.findMonkey("Jimmy").getHousing());
+    assertEquals("Isolation", sanctuary.findMonkey("Jimmy").getHousing());
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void createNewPrimateNoDuplicateEntry() {
     /* Bob already exists, so the method should throw exception and test should pass */
     sanctuary.createNewPrimate("Bob", Size.SMALL.getSizeDescription(), Sex.FEMALE.getSex()
@@ -63,7 +73,63 @@ public class SanctuaryTest {
             , Size.SMALL.getSpaceRequirement(), "Drill");
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
+  public void createNewPrimateNegativeAge() {
+    /* Bob already exists, so the method should throw exception and test should pass */
+    sanctuary.createNewPrimate("Bob", Size.SMALL.getSizeDescription(), Sex.FEMALE.getSex()
+            , -40, 100, Food.EGGS.foodName(), Size.SMALL.getFoodQuantity()
+            , Size.SMALL.getSpaceRequirement(), "Drill");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void createNewPrimateNegativeWeight() {
+    /* Bob already exists, so the method should throw exception and test should pass */
+    sanctuary.createNewPrimate("Bob", Size.SMALL.getSizeDescription(), Sex.FEMALE.getSex()
+            , 40, 100, Food.EGGS.foodName(), Size.SMALL.getFoodQuantity()
+            , Size.SMALL.getSpaceRequirement(), "Drill");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void createNewPrimateNullSize() {
+    /* Bob already exists, so the method should throw exception and test should pass */
+    sanctuary.createNewPrimate("Bob", Size.SMALL.getSizeDescription(), null
+            , 40, 100, Food.EGGS.foodName(), Size.SMALL.getFoodQuantity()
+            , Size.SMALL.getSpaceRequirement(), "Drill");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void createNewPrimateNullFavFood() {
+    /* Bob already exists, so the method should throw exception and test should pass */
+    sanctuary.createNewPrimate("Bob", Size.SMALL.getSizeDescription(), Sex.FEMALE.getSex()
+            , 40, 100, null, Size.SMALL.getFoodQuantity()
+            , Size.SMALL.getSpaceRequirement(), "Drill");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void createNewPrimateNegativeFoodRequirement() {
+    /* Bob already exists, so the method should throw exception and test should pass */
+    sanctuary.createNewPrimate("Bob", Size.SMALL.getSizeDescription(), Sex.FEMALE.getSex()
+            , 40, 100, Food.EGGS.foodName(), -4
+            , Size.SMALL.getSpaceRequirement(), "Drill");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void createNewPrimateNegativeSpaceRequirement() {
+    /* Bob already exists, so the method should throw exception and test should pass */
+    sanctuary.createNewPrimate("Bob", Size.SMALL.getSizeDescription(), Sex.FEMALE.getSex()
+            , 40, 100, Food.EGGS.foodName(), Size.SMALL.getFoodQuantity()
+            , -8, "Drill");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void createNewPrimateNullSe() {
+    /* Bob already exists, so the method should throw exception and test should pass */
+    sanctuary.createNewPrimate("Bob", null, Sex.FEMALE.getSex()
+            , 40, -100, Food.EGGS.foodName(), Size.SMALL.getFoodQuantity()
+            , Size.SMALL.getSpaceRequirement(), "Drill");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
   public void createNewPrimateNullName() {
     /* Name should not be null, so the method should throw exception and test should pass */
     sanctuary.createNewPrimate(null, Size.SMALL.getSizeDescription(), Sex.FEMALE.getSex()
@@ -96,7 +162,7 @@ public class SanctuaryTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testForNonExistentMonkeyMedicalCondition() {
-    sanctuary.changeMedicalConditionOfMonkey("Alia",true);
+    sanctuary.changeMedicalConditionOfMonkey("Alia", true);
   }
 
   /**
@@ -105,7 +171,7 @@ public class SanctuaryTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testForNullMonkeyMedicalCondition() {
-    sanctuary.changeMedicalConditionOfMonkey(null,true);
+    sanctuary.changeMedicalConditionOfMonkey(null, true);
   }
 
   /* keep the medical condition same and test if monkey is not shifted
@@ -113,9 +179,9 @@ public class SanctuaryTest {
    * giving false again should not shift the monkey from isolation to enclosure
    * */
   @Test(expected = IllegalStateException.class)
-    public void testForSameHousingMedicalCondition() {
+  public void testForSameHousingMedicalCondition() {
     sanctuary.changeMedicalConditionOfMonkey("Blim", false);
-    }
+  }
 
   @Test
   public void getAlphabeticalListOfMonkeys() {
@@ -128,20 +194,20 @@ public class SanctuaryTest {
   @Test
   public void getEnclosureSign() {
     /* First move monkey to enclosure, then check assert condition. */
-    sanctuary.changeMedicalConditionOfMonkey("Blim",true);
+    sanctuary.changeMedicalConditionOfMonkey("Blim", true);
     assertEquals("Enclosure sign for Cage 0\n" +
             "Monkey Name: Blim\n" +
             "Sex: FEMALE\n" +
             "Favorite Food: EGGS\n" +
-            "--------------------------"+'\n',sanctuary.getEnclosureSign(0));
-    sanctuary.changeMedicalConditionOfMonkey("Tom",true);
+            "--------------------------" + '\n', sanctuary.getEnclosureSign(0));
+    sanctuary.changeMedicalConditionOfMonkey("Tom", true);
     assertEquals("Enclosure sign for Cage 1\n" +
             "Monkey Name: Tom\n" +
             "Sex: MALE\n" +
             "Favorite Food: FRUITS\n" +
-            "--------------------------\n",sanctuary.getEnclosureSign(1));
-    sanctuary.changeMedicalConditionOfMonkey("Tom",false);
-    sanctuary.changeMedicalConditionOfMonkey("Black",true);
+            "--------------------------\n", sanctuary.getEnclosureSign(1));
+    sanctuary.changeMedicalConditionOfMonkey("Tom", false);
+    sanctuary.changeMedicalConditionOfMonkey("Black", true);
     assertEquals("Enclosure sign for Cage 0\n" +
             "Monkey Name: Blim\n" +
             "Sex: FEMALE\n" +
@@ -150,13 +216,13 @@ public class SanctuaryTest {
             "Monkey Name: Black\n" +
             "Sex: FEMALE\n" +
             "Favorite Food: EGGS\n" +
-            "--------------------------\n",sanctuary.getEnclosureSign(0));
+            "--------------------------\n", sanctuary.getEnclosureSign(0));
   }
 
   /**
    * If Cage No. entered is greater than the number of cages in Isolation.
    */
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testForCageNoNotInEnclosure() {
     sanctuary.getEnclosureSign(7);
   }
@@ -181,7 +247,7 @@ public class SanctuaryTest {
     Map<String, Map<String, String>> alphabeticalSpeciesList
             = new HashMap<>();
     /* Changing medical condition of a monkey and moving it to enclosure */
-    sanctuary.changeMedicalConditionOfMonkey("Black",true);
+    sanctuary.changeMedicalConditionOfMonkey("Black", true);
     Map<String, String> map = new HashMap<>();
     map.put("Isolation", "Cage No: 1");
     map.put("Enclosure", "Cage No: 1");
@@ -202,24 +268,24 @@ public class SanctuaryTest {
     Map<String, String> map = new HashMap<>();
     /* Check a species which is in multiple cages of isolation */
     map.put("Isolation", "Cage No: 1, 4");
-    speciesMap.put("Drill",map);
+    speciesMap.put("Drill", map);
     assertEquals(speciesMap, sanctuary.lookUpSpecies("Drill"));
 
     /* Changing medical condition of a monkey and moving it to enclosure */
-    sanctuary.changeMedicalConditionOfMonkey("Black",true);
+    sanctuary.changeMedicalConditionOfMonkey("Black", true);
     map = new HashMap<>();
     map.put("Isolation", "Cage No: 1");
     map.put("Enclosure", "Cage No: 1");
-    speciesMap.put("Drill",map);
+    speciesMap.put("Drill", map);
     /* Check a monkey which is in multiple housing */
     assertEquals(speciesMap, sanctuary.lookUpSpecies("Drill"));
 
     /* Changing medical condition of a monkey and moving it to enclosure */
-    sanctuary.changeMedicalConditionOfMonkey("Blim",true);
+    sanctuary.changeMedicalConditionOfMonkey("Blim", true);
     /* Check for a species consisting of multiple primates which is in same cages of enclosure */
     map = new HashMap<>();
     map.put("Enclosure", "Cage No: 1");
-    speciesMap.put("Drill",map);
+    speciesMap.put("Drill", map);
     assertEquals(speciesMap, sanctuary.lookUpSpecies("Drill"));
   }
 
@@ -232,17 +298,28 @@ public class SanctuaryTest {
   @Test
   public void testFindMonkeyDetailsByName() {
     assertEquals("Tom", sanctuary.findMonkey("Tom").getName());
-    assertEquals("Isolation",sanctuary.findMonkey("Tom").getHousing());
+    assertEquals("Isolation", sanctuary.findMonkey("Tom").getHousing());
   }
 
-  @Test (expected = NullPointerException.class)
-  public void testForFindMonkeyNullName() {
-    sanctuary.findMonkey(null);
-  }
-
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testForFindMonkeyIncorrectName() {
     sanctuary.findMonkey("Lolly");
   }
 
+  @Test (expected = IllegalArgumentException.class)
+  public void testForUpdateNegativeIsolationSize() {
+    sanctuary.updateHousingSize(-2,6);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testForUpdateNegativeEnclosureSize() {
+    sanctuary.updateHousingSize(7,-2);
+  }
+
+  @Test
+  public void updateHousingSize() {
+    sanctuary.updateHousingSize(8,6);
+    assertEquals(8,sanctuary.getIsolation().getHousingSize());
+    assertEquals(6,sanctuary.getEnclosure().getHousingSize());
+  }
 }

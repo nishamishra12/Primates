@@ -94,4 +94,15 @@ public class EnclosureTest {
     enclosure.removeMonkey(p);
     assertEquals("Check size of enclosure after removing primate",true,enclosure.getHousingList().isEmpty());
   }
+
+  @Test
+  public void getHousingSize() {
+    assertEquals(5,enclosure.getHousingSize());
+  }
+
+  @Test
+  public void setHousingSize() {
+    enclosure.setHousingSize(10);
+    assertEquals(10,enclosure.getHousingSize());
+  }
 }

@@ -29,4 +29,14 @@ public interface Housing {
    */
   public List<List<Primate>> getHousingList();
 
+  /**
+   * this method provides the size of the housing.
+   * @return
+   */
+  public int getHousingSize();
+
+  /**
+   * this method sets the size of the housing.
+   */
+  public void setHousingSize(int m);
 }
