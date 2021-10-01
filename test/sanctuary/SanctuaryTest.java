@@ -9,6 +9,7 @@ import java.util.Map;
 import jungleprimatesanctuary.Food;
 import jungleprimatesanctuary.MonkeyFactory;
 import jungleprimatesanctuary.Sanctuary;
+import jungleprimatesanctuary.SanctuaryInterface;
 import jungleprimatesanctuary.Sex;
 import jungleprimatesanctuary.Size;
 
@@ -20,7 +21,7 @@ import static org.junit.Assert.assertNotEquals;
  */
 public class SanctuaryTest {
 
-  private final Sanctuary sanctuary;
+  private final SanctuaryInterface sanctuary;
 
   public SanctuaryTest() {
     sanctuary = new Sanctuary(new MonkeyFactory(), 7, 4);
@@ -128,12 +129,28 @@ public class SanctuaryTest {
   public void getEnclosureSign() {
     /* First move monkey to enclosure, then check assert condition. */
     sanctuary.changeMedicalConditionOfMonkey("Blim",true);
-    assertEquals("Monkey Name: Blim, Sex: FEMALE, Favorite Food: EGGS",sanctuary.getEnclosureSign(0));
+    assertEquals("Enclosure sign for Cage 0\n" +
+            "Monkey Name: Blim\n" +
+            "Sex: FEMALE\n" +
+            "Favorite Food: EGGS\n" +
+            "--------------------------"+'\n',sanctuary.getEnclosureSign(0));
     sanctuary.changeMedicalConditionOfMonkey("Tom",true);
-    assertEquals("Monkey Name: Tom, Sex: MALE, Favorite Food: FRUITS",sanctuary.getEnclosureSign(1));
+    assertEquals("Enclosure sign for Cage 1\n" +
+            "Monkey Name: Tom\n" +
+            "Sex: MALE\n" +
+            "Favorite Food: FRUITS\n" +
+            "--------------------------\n",sanctuary.getEnclosureSign(1));
     sanctuary.changeMedicalConditionOfMonkey("Tom",false);
     sanctuary.changeMedicalConditionOfMonkey("Black",true);
-    assertEquals("Monkey Name: Blim, Sex: FEMALE, Favorite Food: EGGSMonkey Name: Black, Sex: FEMALE, Favorite Food: EGGS",sanctuary.getEnclosureSign(0));
+    assertEquals("Enclosure sign for Cage 0\n" +
+            "Monkey Name: Blim\n" +
+            "Sex: FEMALE\n" +
+            "Favorite Food: EGGS\n" +
+            "--------------------------\n" +
+            "Monkey Name: Black\n" +
+            "Sex: FEMALE\n" +
+            "Favorite Food: EGGS\n" +
+            "--------------------------\n",sanctuary.getEnclosureSign(0));
   }
 
   /**

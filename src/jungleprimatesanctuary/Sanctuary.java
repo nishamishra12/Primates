@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.StringJoiner;
 import java.util.TreeMap;
 
-public class Sanctuary {
+public class Sanctuary implements SanctuaryInterface{
 
   private final MonkeyFactory monkeyFactory;
   private final Housing isolation;
@@ -38,14 +38,15 @@ public class Sanctuary {
    * @throws IllegalArgumentException when a newly added monkey has name same as a
    *                                  monkey already present in the sanctuary
    */
+  @Override
   public void createNewPrimate(String name, String size, String sex, int age, double weight
           , String favFood, int foodReq, int spaceReq, String speciesType) throws IllegalArgumentException {
     List<Primate> arr = entireHousingList();
     if (name ==null) {
       throw new IllegalArgumentException("Name of the monkey cannot be null");
     }
-    for (int i = 0; i < arr.size(); i++) {
-      if (arr.get(i).getName().equals(name)) {
+    for (Primate value : arr) {
+      if (value.getName().equals(name)) {
         throw new IllegalArgumentException("Can't add monkey, duplicate monkey. Name of a monkey " +
                 "should be unique!");
       }
@@ -66,6 +67,7 @@ public class Sanctuary {
    * @throws IllegalStateException    when a monkey is already present in appropriate housing
    * @throws IllegalArgumentException when a monkey is not present in the sanctuary.
    */
+  @Override
   public void changeMedicalConditionOfMonkey(String name, boolean medicalFlag)
           throws IllegalStateException, IllegalArgumentException {
     shiftMonkey(name, medicalFlag);
@@ -112,6 +114,7 @@ public class Sanctuary {
    *
    * @return list of primates housed in the sanctuary
    */
+  @Override
   public List<Primate> getAlphabeticalListOfMonkeys() {
     List<Primate> arr = entireHousingList();
     arr.sort(Comparator.comparing(Primate::getName));
@@ -127,6 +130,7 @@ public class Sanctuary {
    * @return the enclosure sign for all the primates in the enclosure cage
    * @throws IllegalArgumentException when the cage number entered is not present in the enclosure
    */
+  @Override
   public String getEnclosureSign(int CageNo) throws IllegalArgumentException {
 
     if (CageNo >= enclosure.getHousingList().size()) {
@@ -138,7 +142,7 @@ public class Sanctuary {
       str.append("The cage is currently empty, " +
               "and not housed by any primate troop");
     } else {
-      str.append("Enclosure sign for Cage "+ CageNo+'\n');
+      str.append("Enclosure sign for Cage ").append(CageNo).append('\n');
       for (Primate value : arr) {
         str.append("Monkey Name: ").append(value.getName()).append('\n').append("Sex: ").
                 append(value.getSex()).append('\n').append("Favorite Food: ").
@@ -154,6 +158,7 @@ public class Sanctuary {
    * along with the quantity required.
    * @return favorite food and quantity of all the favorite foods.
    */
+  @Override
   public Map<String, Integer> getShoppingList() {
 
     Map<String, Integer> shoppingList = new HashMap<>();
@@ -177,6 +182,7 @@ public class Sanctuary {
    * along with their respective housing.
    * @return alphabetical list of the species.
    */
+  @Override
   public Map<String, Map<String, String>> getAlphabeticalSpeciesList() {
     return getHousingOfSpeciesHelper(uniqueListOfSpecies());
   }
@@ -187,6 +193,7 @@ public class Sanctuary {
    * @return the list of species along with housing details and cage numbers
    * @throws IllegalArgumentException when the given species is not present.
    */
+  @Override
   public Map<String, Map<String, String>> lookUpSpecies(String species) throws IllegalArgumentException {
     String[] s = new String[1];
     s[0] = species;
@@ -269,6 +276,7 @@ public class Sanctuary {
    * @throws IllegalArgumentException when name entered is not present in the sanctuary.
    * @throws NullPointerException when name passed is null.
    */
+  @Override
   public Primate findMonkey(String name) throws IllegalArgumentException, NullPointerException {
     if (name == null) {
       throw new NullPointerException("Monkey name cannot be null");

@@ -5,6 +5,7 @@ import jungleprimatesanctuary.Food;
 import jungleprimatesanctuary.MonkeyFactory;
 import jungleprimatesanctuary.Primate;
 import jungleprimatesanctuary.Sanctuary;
+import jungleprimatesanctuary.SanctuaryInterface;
 import jungleprimatesanctuary.Sex;
 import jungleprimatesanctuary.Size;
 
@@ -12,7 +13,7 @@ public class JunglePrimateDriver {
 
   public static void main(String[] args) {
 
-    Sanctuary sanctuary = new Sanctuary(new MonkeyFactory(), 7, 4);
+    SanctuaryInterface sanctuary = new Sanctuary(new MonkeyFactory(), 7, 4);
 
     /**create new monkeys, new monkeys will always go to Isolation.
      * Enter housing values null as user doesn't know the type of housing or cage no

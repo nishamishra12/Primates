@@ -1,5 +1,10 @@
 package jungleprimatesanctuary;
 
+/**
+ * A Primate interface represents the primates or monkeys residing in a sanctuary.
+ * Classes that implement this interface will vary depending
+ * upon the species of the primate.
+ */
 public interface Primate {
 
   public String getName();
