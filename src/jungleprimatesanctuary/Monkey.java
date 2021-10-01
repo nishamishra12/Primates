@@ -1,4 +1,4 @@
-package JunglePrimateSanctuary;
+package jungleprimatesanctuary;
 
 /**
  * Abstract base class for implementations of {@link Primate}. This class
@@ -7,7 +7,7 @@ package JunglePrimateSanctuary;
  * the interface has the option of extending this class, or directly
  * implementing all the methods.
  */
-abstract class Monkey implements Primate {
+public abstract class Monkey implements Primate {
 
   private final String name;
   private final String size;
@@ -17,13 +17,22 @@ abstract class Monkey implements Primate {
   private final String favFood;
   private final int foodReq;
   private final int spaceReq;
-  private boolean isHealthy;
   private String housing;
   private int housingNo;
 
+  /**
+   * Constructs a primate class in terms of different parameters of a monkey.
+   * @param name this parameter takes the name of the monkey
+   * @param size this parameter takes the size of the monkey
+   * @param sex this parameter takes the sex of the monkey
+   * @param age this parameter takes the age of the monkey
+   * @param weight this parameter takes the weight of the monkey
+   * @param favFood this parameter takes the favorite food of the monkey
+   * @param foodReq this parameter takes the food requirement of the monkey
+   * @param spaceReq this parameter takes the space requirement of the monkey
+   */
   public Monkey(String name, String size, String sex, int age, double weight
-          , String favFood, int foodReq, int spaceReq, boolean isHealthy
-          , String housing, int housingNo) {
+          , String favFood, int foodReq, int spaceReq) {
     this.name = name;
     this.size = size;
     this.age = age;
@@ -32,25 +41,11 @@ abstract class Monkey implements Primate {
     this.favFood = favFood;
     this.foodReq = foodReq;
     this.spaceReq = spaceReq;
-    this.isHealthy = isHealthy;
-    this.housing = housing;
-    this.housingNo = housingNo;
   }
 
   /**
-   * * Create a new primate object.
    *
-   * @return the primate
-   */
-  @Override
-  public Primate getNewPrimate() {
-    return this;
-  }
-
-  /**
-   * * Get the name of each individual monkey.
-   *
-   * @return the monkey Name.
+   * {@inheritDoc}
    */
   @Override
   public String getName() {
@@ -58,9 +53,8 @@ abstract class Monkey implements Primate {
   }
 
   /**
-   * * Get the size of each individual monkey.
    *
-   * @return the monkey size.
+   * {@inheritDoc}
    */
   @Override
   public String getSize() {
@@ -68,9 +62,8 @@ abstract class Monkey implements Primate {
   }
 
   /**
-   * * Get the sex of each individual monkey.
    *
-   * @return the monkey sex.
+   * {@inheritDoc}
    */
   @Override
   public String getSex() {
@@ -78,9 +71,8 @@ abstract class Monkey implements Primate {
   }
 
   /**
-   * * Get the age of each individual monkey.
    *
-   * @return the monkey age.
+   * {@inheritDoc}
    */
   @Override
   public int getAge() {
@@ -88,9 +80,8 @@ abstract class Monkey implements Primate {
   }
 
   /**
-   * * Get the weight of each individual monkey.
    *
-   * @return the monkey weight.
+   * {@inheritDoc}
    */
   @Override
   public double getWeight() {
@@ -98,9 +89,8 @@ abstract class Monkey implements Primate {
   }
 
   /**
-   * * Get the favroite food of each individual monkey.
    *
-   * @return the monkey favorite food.
+   * {@inheritDoc}
    */
   @Override
   public String getFavFood() {
@@ -108,9 +98,8 @@ abstract class Monkey implements Primate {
   }
 
   /**
-   * * Get the space requirement of each individual monkey.
    *
-   * @return the space requirement of the monkey.
+   * {@inheritDoc}
    */
   @Override
   public int getSpaceReq() {
@@ -118,47 +107,42 @@ abstract class Monkey implements Primate {
   }
 
   /**
-   * * Get the medicalCondition of each individual monkey.
    *
-   * @return the medical condition of the monkey.
+   * {@inheritDoc}
    */
-  @Override
-  public boolean getMedicalCondition() {
-    return this.isHealthy;
-  }
-
-  /**
-   * * Set the medicalCondition of each individual monkey.
-   *
-   * @return void.
-   */
-  @Override
-  public void setHealthy(boolean healthy) {
-    isHealthy = healthy;
-  }
-
   @Override
   public String getHousing() {
     return housing;
   }
 
+  /**
+   *
+   * {@inheritDoc}
+   */
   @Override
   public void setHousing(String housing) {
     this.housing = housing;
   }
 
+  /**
+   *
+   * {@inheritDoc}
+   */
   public int getHousingNo() {
     return housingNo;
   }
 
+  /**
+   *
+   * {@inheritDoc}
+   */
   public void setHousingNo(int housingNo) {
     this.housingNo = housingNo;
   }
 
   /**
-   * * Get the space requirement of each individual monkey.
    *
-   * @return the space requirement of the monkey.
+   * {@inheritDoc}
    */
   public int getFoodReq() {
     return foodReq;

@@ -1,28 +1,35 @@
-package JunglePrimateSanctuary;
+package jungleprimatesanctuary;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Enclosure class represents the list of monkeys present in enclosure housing.
+ */
 public class Enclosure implements Housing {
 
-  private int m;
-  private final int enclosureSize = 100; //every enclosure is of fixed size 100 sq.m
+  private final int enclosureSize = 100; /* every enclosure is of fixed size 100 sq.m */
   private final List<List<Primate>> enclosureList = new ArrayList<>();
+  private int m;
 
   public Enclosure(int m) {
     this.m = m;
   }
 
+  /**
+   * * Helper method to check availability for a primate in enclosure.
+   *
+   * @return the availableSpace
+   */
   private int checkAvailability(String speciesType, int space) {
     int spaceOccupied = 0;
-    int remainingSpace = 0;
+    int remainingSpace;
     int troopNo = 0;
 
     if (enclosureList.isEmpty()) {
       troopNo = 0;
     } else {
       for (int i = 0; i < enclosureList.size(); i++) {
-        remainingSpace = 0;
         for (int j = 0; j < enclosureList.get(i).size(); j++) {
           if (speciesType != enclosureList.get(i).get(0).getSpecies()) {
             troopNo = i++;
@@ -42,66 +49,57 @@ public class Enclosure implements Housing {
   }
 
   /**
-   * * Add monkey to housing.
-   *
-   * @return void
+   * {@inheritDoc}
    */
   @Override
-  public void addMonkey(Primate p) {
+  public void addMonkey(Primate p) throws NullPointerException, IllegalStateException {
+    if (p == null) {
+      throw new IllegalArgumentException("No primate Object passed");
+    }
     int troopNo = checkAvailability(p.getSpecies(), p.getSpaceReq());
-    if (troopNo > m) {
-      throw new IllegalStateException("No space in Enclosure");
+    if (troopNo >= m) {
+      throw new IllegalStateException("No space in Enclosure, please check other sanctuaries");
     } else {
-      if (getEnclosureList().isEmpty() || getEnclosureList().size()==troopNo) {
+      if (getHousingList().isEmpty() || getHousingList().size() == troopNo) {
         ArrayList<Primate> newItem = new ArrayList<Primate>();
         newItem.add(p);
         enclosureList.add(troopNo, newItem);
       } else {
-        for (int k = 0; k < getEnclosureList().get(troopNo).size(); k++) {
-          if (enclosureList.get(troopNo).get(k).getName().equals(p.getName())) {
-            throw new IllegalArgumentException("Duplicate Name, Name is a key and should be unique");
-          }
-        }
         enclosureList.get(troopNo).add(p);
       }
-      p.setHousing(HousingType.Enclosure.gethousingType());
-      p.setHousingNo(troopNo);
+      p.setHousing(HousingType.ENCLOSURE.gethousingType());
+      p.setHousingNo(troopNo + 1);
     }
   }
 
   /**
-   * * Get list of monkeys in isolation.
-   *
-   * @return isolation list
+   * {@inheritDoc}
    */
   @Override
-  public List<List<Primate>> getEnclosureList() {
+  public List<List<Primate>> getHousingList() {
     return enclosureList;
   }
 
   /**
-   * * Get Enclosure List.
-   *
-   * @return Enclosure List
-   */
-  @Override
-  public List<Primate> getIsolationList() {
-    return null;
-  }
-
-  /**
-   * * Remove monkey from housing.
-   *
-   * @return void
+   * {@inheritDoc}
    */
   @Override
   public void removeMonkey(Primate p) {
+    if(p==null) {
+      throw new IllegalArgumentException("primate object is null, not a valid argument.");
+    }
     if (!enclosureList.isEmpty()) {
       for (int i = 0; i < enclosureList.size(); i++) {
         for (int j = 0; j < enclosureList.get(i).size(); j++) {
-          if (enclosureList.get(i).get(j).getName() == p.getName()) {
-            enclosureList.get(i).remove(enclosureList.get(i).get(j));
-
+          if (enclosureList.get(i).get(j).getName().equals(p.getName())) {
+            if(enclosureList.get(i).size()<=1) {
+              enclosureList.remove(enclosureList.get(i));
+              break;
+            }
+            else {
+              enclosureList.get(i).remove(enclosureList.get(i).get(j));
+              break;
+            }
           }
         }
       }

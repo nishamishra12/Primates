@@ -1,5 +1,8 @@
-package JunglePrimateSanctuary;
+package jungleprimatesanctuary;
 
+/**
+ * This is an enumeration for favorite food of monkey.
+ */
 public enum Food {
   EGGS("EGGS"),
   FRUITS("FRUITS"),
@@ -11,7 +14,7 @@ public enum Food {
 
   private final String foodName;
 
-  Food(String foodName) {
+  private Food(String foodName) {
     this.foodName = foodName;
   }
 
