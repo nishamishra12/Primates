@@ -57,23 +57,6 @@ public class Sanctuary implements SanctuaryInterface {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Housing getIsolation() {
-    return this.isolation;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Housing getEnclosure() {
-    return this.enclosure;
-  }
-
-
-  /**
    * This method creates a new primate object and adds it to the isolation list.
    *
    * @param name        This parameter takes the name of the monkey
@@ -371,10 +354,21 @@ public class Sanctuary implements SanctuaryInterface {
     return primate;
   }
 
-  private String[] getMonkeyHousing(String name) {
-    if (name == null) {
-      throw new IllegalArgumentException("Monkey name cannot be null");
-    }
-    return null;
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Housing getIsolation() {
+    return this.isolation;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Housing getEnclosure() {
+    return this.enclosure;
+  }
+
+
 }

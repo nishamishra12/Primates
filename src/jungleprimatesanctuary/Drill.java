@@ -10,7 +10,7 @@ public class Drill extends Monkey {
    * @param name This parameter takes the name of the monkey
    * @param size This parameter takes the size of the monkey
    * @param sex This parameter takes the sex of the monkey
-   * @param age This parameter takes the
+   * @param age This parameter takes the age
    * @param weight
    * @param favFood
    * @param foodReq
