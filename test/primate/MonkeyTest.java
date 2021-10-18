@@ -9,8 +9,11 @@ import jungleprimatesanctuary.Primate;
 import jungleprimatesanctuary.Sex;
 import jungleprimatesanctuary.Size;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+/**
+ * Test to check all implementation of Monkey class in primate interface.
+ */
 public class MonkeyTest {
   private Primate p;
   private MonkeyFactory monkeyFactory;

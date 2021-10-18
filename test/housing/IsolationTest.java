@@ -35,8 +35,9 @@ public class IsolationTest {
   /**
    * Creates a new primate object everytime it is called.
    */
-  protected Primate createPrimateObject(String name, String size, String sex, int age, double weight
-          , String favFood, int foodReq, int spaceReq, String speciesType){
+  protected Primate createPrimateObject(String name, String size, String sex, int age,
+                                        double weight, String favFood, int foodReq,
+                                        int spaceReq, String speciesType) {
     return monkeyFactory.createMonkey(name, size, sex, age, weight
             , favFood, foodReq, spaceReq, speciesType);
   }
@@ -90,33 +91,28 @@ public class IsolationTest {
             isolation.getHousingList().get(0).size());
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testForRemovingWrongMonkey() {
     isolation.removeMonkey(null);
   }
 
-  @Test (expected = IllegalStateException.class)
-    public void testForRemovingMonkeyFromEmptyList() {
+  @Test(expected = IllegalArgumentException.class)
+  public void testForRemovingNotPresentPrimate() {
+    isolation.addMonkey(p);
+    p = createPrimateObject("Janice", Size.MEDIUM.getSizeDescription(), Sex.FEMALE.getSex()
+            , 40, 100, Food.EGGS.foodName(), Size.MEDIUM.getFoodQuantity()
+            , Size.MEDIUM.getSpaceRequirement(), "Drill");
     isolation.removeMonkey(p);
   }
 
-  @Test (expected = IllegalArgumentException.class)
-    public void testForRemovingNotPresentPrimate() {
-    isolation.addMonkey(p);
-     p = createPrimateObject("Janice", Size.MEDIUM.getSizeDescription(), Sex.FEMALE.getSex()
-            , 40, 100, Food.EGGS.foodName(), Size.MEDIUM.getFoodQuantity()
-            , Size.MEDIUM.getSpaceRequirement(), "Drill");
-     isolation.removeMonkey(p);
-    }
-
   @Test
   public void getHousingSize() {
-    assertEquals(5,isolation.getHousingSize());
+    assertEquals(5, isolation.getHousingSize());
   }
 
   @Test
   public void setHousingSize() {
     isolation.setHousingSize(10);
-    assertEquals(10,isolation.getHousingSize());
+    assertEquals(10, isolation.getHousingSize());
   }
-  }
+}

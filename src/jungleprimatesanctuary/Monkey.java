@@ -22,17 +22,18 @@ public abstract class Monkey implements Primate {
 
   /**
    * Constructs a primate class in terms of different parameters of a monkey.
-   * @param name this parameter takes the name of the monkey
-   * @param size this parameter takes the size of the monkey
-   * @param sex this parameter takes the sex of the monkey
-   * @param age this parameter takes the age of the monkey
-   * @param weight this parameter takes the weight of the monkey
-   * @param favFood this parameter takes the favorite food of the monkey
-   * @param foodReq this parameter takes the food requirement of the monkey
+   *
+   * @param name     this parameter takes the name of the monkey
+   * @param size     this parameter takes the size of the monkey
+   * @param sex      this parameter takes the sex of the monkey
+   * @param age      this parameter takes the age of the monkey
+   * @param weight   this parameter takes the weight of the monkey
+   * @param favFood  this parameter takes the favorite food of the monkey
+   * @param foodReq  this parameter takes the food requirement of the monkey
    * @param spaceReq this parameter takes the space requirement of the monkey
    */
-  public Monkey(String name, String size, String sex, int age, double weight
-          , String favFood, int foodReq, int spaceReq) {
+  public Monkey(String name, String size, String sex, int age, double weight,
+                String favFood, int foodReq, int spaceReq) {
     this.name = name;
     this.size = size;
     this.age = age;
@@ -44,7 +45,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
@@ -53,7 +53,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
@@ -62,7 +61,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
@@ -71,7 +69,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
@@ -80,7 +77,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
@@ -89,7 +85,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
@@ -98,7 +93,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
@@ -107,7 +101,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
@@ -116,7 +109,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
@@ -125,7 +117,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   public int getHousingNo() {
@@ -133,7 +124,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   public void setHousingNo(int housingNo) {
@@ -141,7 +131,6 @@ public abstract class Monkey implements Primate {
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   public int getFoodReq() {

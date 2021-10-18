@@ -10,10 +10,10 @@ public class Isolation implements Housing {
 
   private final List<Primate> isolationList = new ArrayList<Primate>();
 
-  private int n;
+  private int noOfIsolationCages;
 
   public Isolation(int n) {
-    this.n = n;
+    this.noOfIsolationCages = n;
   }
 
   /**
@@ -22,19 +22,20 @@ public class Isolation implements Housing {
    * @return the availableSpace
    */
   private int checkAvailability() {
-    if (isolationList.size() < n) {
+    if (isolationList.size() < noOfIsolationCages) {
 
-      return (n - isolationList.size());
+      return (noOfIsolationCages - isolationList.size());
     } else {
       return 0;
     }
   }
 
   /**
-   * This method adds a new primate to isolation
-   * @param p takes primate object.
-   * @throws IllegalArgumentException
-   * @throws IllegalStateException
+   * This method adds a new primate to housing.
+   *
+   * @param p takes primate object
+   * @throws IllegalArgumentException when an invalid primate is passed
+   * @throws IllegalStateException    when a particular housing is full
    */
   @Override
   public void addMonkey(Primate p) throws IllegalArgumentException, IllegalStateException {
@@ -46,13 +47,15 @@ public class Isolation implements Housing {
       throw new IllegalStateException("No space in isolation");
     }
     p.setHousing(HousingType.ISOLATION.gethousingType());
-    p.setHousingNo(isolationList.size() + 1);
     isolationList.add(p);
+    p.setHousingNo(isolationList.indexOf(p) + 1);
+
   }
 
   /**
-   * This method provides list of primates in cages of housing
-   * @return list of primates in all housing cages.
+   * This method provides list of primates in cages of isolation.
+   *
+   * @return list of primates in all housing cages
    */
   @Override
   public List<List<Primate>> getHousingList() {
@@ -62,30 +65,26 @@ public class Isolation implements Housing {
   }
 
   /**
-   * This method removes a primate object from housing
+   * This method removes a primate object from isolation.
+   *
    * @param p takes primate object.
-   * @throws IllegalStateException
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException when an invalid primate object is passed
    */
   @Override
-  public void removeMonkey(Primate p) throws IllegalStateException, IllegalArgumentException {
+  public void removeMonkey(Primate p) throws IllegalArgumentException {
     if (p == null) {
       throw new IllegalArgumentException("primate object is null, not a valid argument.");
     }
-    if (isolationList.isEmpty()) {
-      throw new IllegalStateException("Isolation is empty, there are no primates in isolation");
-    } else {
-      int count = 0;
-      for (int i = 0; i < isolationList.size(); i++) {
-        if (isolationList.get(i).getName().equals(p.getName())) {
-          count++;
-          isolationList.remove(p);
-          break;
-        }
+    int count = 0;
+    for (int i = 0; i < isolationList.size(); i++) {
+      if (isolationList.get(i).getName().equals(p.getName())) {
+        count++;
+        isolationList.remove(p);
+        break;
       }
-      if (count == 0) {
-        throw new IllegalArgumentException("primate not present in isolation");
-      }
+    }
+    if (count == 0) {
+      throw new IllegalArgumentException("primate not present in isolation");
     }
   }
 
@@ -94,16 +93,15 @@ public class Isolation implements Housing {
    */
   @Override
   public int getHousingSize() {
-    return n;
+    return noOfIsolationCages;
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
   public void setHousingSize(int m) {
-    this.n = m;
+    this.noOfIsolationCages = m;
   }
 
 }

@@ -1,12 +1,12 @@
 package jungleprimatesanctuary;
 
 /**
- * Class for Saki Species extends Monkey class
+ * Class for Saki Species extends Monkey class.
  */
 public class Saki extends Monkey {
 
-  public Saki(String name, String size, String sex, int age, double weight, String favFood, int foodReq
-          , int spaceReq) {
+  public Saki(String name, String size, String sex, int age, double weight, String favFood,
+              int foodReq, int spaceReq) {
     super(name, size, sex, age, weight, favFood, foodReq, spaceReq);
   }
 

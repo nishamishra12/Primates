@@ -9,7 +9,7 @@ public enum HousingType {
 
   private final String housingType;
 
-  private HousingType(String housingType) {
+  HousingType(String housingType) {
     this.housingType = housingType;
   }
 

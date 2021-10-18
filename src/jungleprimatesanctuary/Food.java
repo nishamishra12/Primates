@@ -14,7 +14,7 @@ public enum Food {
 
   private final String foodName;
 
-  private Food(String foodName) {
+  Food(String foodName) {
     this.foodName = foodName;
   }
 

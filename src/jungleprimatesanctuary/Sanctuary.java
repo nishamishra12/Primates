@@ -9,24 +9,27 @@ import java.util.Map;
 import java.util.StringJoiner;
 import java.util.TreeMap;
 
+/**
+ * This class represents a sanctuary which houses different type of species.
+ */
 public class Sanctuary implements SanctuaryInterface {
 
-  private final MonkeyFactory monkeyFactory;
-  private Housing isolation;
-  private Housing enclosure;
+  private final Housing isolation;
+  private final Housing enclosure;
   private Primate primate;
+  private final int initialIsolationSize;
+  private final int initialEnclosureSize;
 
   /**
-   * Constructs a Sanctuary which houses primates of different species
+   * Constructs a Sanctuary which houses primates of different species.
    *
-   * @param monkeyFactory this parameter takes the monkey object
    * @param isolationSize this parameter takes the isolation size
    * @param enclosureSize this parameter takes the enclosure size
    * @throws IllegalArgumentException when a non-positive number is entered as housing size
    */
-  public Sanctuary(MonkeyFactory monkeyFactory, int isolationSize, int enclosureSize) throws IllegalArgumentException {
+  public Sanctuary(int isolationSize, int enclosureSize)
+          throws IllegalArgumentException {
 
-    this.monkeyFactory = monkeyFactory;
     if (isolationSize <= 0) {
       throw new IllegalArgumentException("Size of the isolation should be a positive number");
     }
@@ -35,22 +38,31 @@ public class Sanctuary implements SanctuaryInterface {
     }
     this.isolation = new Isolation(isolationSize);
     this.enclosure = new Enclosure(enclosureSize);
+    this.initialIsolationSize = isolationSize;
+    this.initialEnclosureSize = enclosureSize;
   }
 
   /**
-   * This method updates the size of enclosure and isolation
+   * This method updates the size of enclosure and isolation.
    *
    * @param isolationSize takes isolation size
-   * @param enclosureSize
+   * @param enclosureSize takes enclosure size
    * @throws IllegalArgumentException when a non-positive number is entered as housing size
    */
   @Override
-  public void updateHousingSize(int isolationSize, int enclosureSize) throws IllegalArgumentException {
+  public void updateHousingSize(int isolationSize, int enclosureSize)
+          throws IllegalArgumentException {
     if (isolationSize <= 0) {
       throw new IllegalArgumentException("Size of the isolation should be a positive number");
     }
     if (enclosureSize <= 0) {
       throw new IllegalArgumentException("Size of the enclosure should be a positive number");
+    }
+    if (isolationSize < initialIsolationSize) {
+      throw new IllegalArgumentException("Size of the isolation cannot be decreased");
+    }
+    if (enclosureSize <= initialEnclosureSize) {
+      throw new IllegalArgumentException("Size of the enclosure cannot be decreased");
     }
     isolation.setHousingSize(isolationSize);
     enclosure.setHousingSize(enclosureSize);
@@ -70,11 +82,13 @@ public class Sanctuary implements SanctuaryInterface {
    * @param speciesType this parameter takes the species type of the monkey
    * @throws IllegalArgumentException when a newly added monkey has name same as a
    *                                  monkey already present in the sanctuary
+   * @throws IllegalStateException    when there is no space in isolation and a new monkey is added.
    */
   @Override
-  public void createNewPrimate(String name, String size, String sex, int age, double weight
-          , String favFood, int foodReq, int spaceReq, String speciesType) throws IllegalArgumentException {
-    List<Primate> arr = entireHousingList();
+  public void createNewPrimate(String name, String size, String sex, int age, double weight,
+                               String favFood, int foodReq, int spaceReq, String speciesType)
+          throws IllegalArgumentException, IllegalStateException {
+
     if (name == null) {
       throw new IllegalArgumentException("Name of the monkey cannot be null");
     }
@@ -96,20 +110,21 @@ public class Sanctuary implements SanctuaryInterface {
     if (spaceReq <= 0) {
       throw new IllegalArgumentException("Space requirement of monkey should be positive");
     }
+    List<Primate> arr = entireHousingList();
     for (Primate value : arr) {
       if (value.getName().equals(name)) {
-        throw new IllegalArgumentException("Can't add monkey, duplicate monkey. Name of a monkey " +
-                "should be unique!");
+        throw new IllegalArgumentException("Can't add monkey, duplicate monkey. Name of a monkey "
+                + "should be unique!");
       }
     }
-    Primate p = monkeyFactory.createMonkey(name, size, sex, age, weight
-            , favFood, foodReq, spaceReq, speciesType);
-    /* Add all new monkey's irrespective of medical condition to Isolation */
+    Primate p = MonkeyFactory.createMonkey(name, size, sex, age, weight, favFood, foodReq,
+            spaceReq, speciesType);
+    /* Add all new monkey's irrespective of medical condition to Isolation. */
     isolation.addMonkey(p);
   }
 
   /**
-   * This method changes the medical condition of the monkey and calls the shift method
+   * This method changes the medical condition of the monkey and calls the shift method.
    * to shift the monkey to appropriate housing based on medical condition
    *
    * @param name        this parameter takes the name of the monkey
@@ -142,14 +157,18 @@ public class Sanctuary implements SanctuaryInterface {
     for (int i = 0; i < arr.size(); i++) {
       if (arr.get(i).getName().equals(name)) {
         /* if medical condition is true then move to isolation, else move to enclosure. */
-        if (!medicalFlag && arr.get(i).getHousing().equals(HousingType.ENCLOSURE.gethousingType())) {
+        if (!medicalFlag && arr.get(i).getHousing()
+                .equals(HousingType.ENCLOSURE.gethousingType())) {
           enclosure.removeMonkey(arr.get(i));
           isolation.addMonkey(arr.get(i));
-        } else if (medicalFlag && arr.get(i).getHousing().equals(HousingType.ISOLATION.gethousingType())) {
+        } else if (medicalFlag && arr.get(i).getHousing()
+                .equals(HousingType.ISOLATION.gethousingType())) {
           isolation.removeMonkey(arr.get(i));
           enclosure.addMonkey(arr.get(i));
-        } else if ((!medicalFlag && arr.get(i).getHousing().equals(HousingType.ISOLATION.gethousingType()))
-                || (medicalFlag && arr.get(i).getHousing().equals(HousingType.ENCLOSURE.gethousingType()))) {
+        } else if ((!medicalFlag && arr.get(i).getHousing()
+                .equals(HousingType.ISOLATION.gethousingType()))
+                || (medicalFlag && arr.get(i).getHousing()
+                .equals(HousingType.ENCLOSURE.gethousingType()))) {
           throw new IllegalStateException("Monkey is already in appropriate housing");
         }
         break;
@@ -176,29 +195,30 @@ public class Sanctuary implements SanctuaryInterface {
    * This method provides the enclosure sign for each individual primate
    * details for an enclosure cage consisting of name, sex, and favorite food of the primate.
    *
-   * @param CageNo this parameter takes the cage no of the enclosure
-   *               for which the enclosure sign is required.
+   * @param cageNumber this parameter takes the cage no of the enclosure
+   *                   for which the enclosure sign is required.
    * @return the enclosure sign for all the primates in the enclosure cage
    * @throws IllegalArgumentException when the cage number entered is not present in the enclosure
    */
   @Override
-  public String getEnclosureSign(int CageNo) throws IllegalArgumentException {
+  public String getEnclosureSign(int cageNumber) throws IllegalArgumentException {
 
-    if (CageNo >= enclosure.getHousingList().size()) {
-      throw new IllegalArgumentException("Enclosure Cage No. entered is not present in the sanctuary");
+    if (cageNumber >= enclosure.getHousingList().size()) {
+      throw new IllegalArgumentException("Enclosure Cage Number "
+              + "entered is not present in the sanctuary");
     }
-    List<Primate> arr = enclosure.getHousingList().get(CageNo);
+    List<Primate> arr = enclosure.getHousingList().get(cageNumber);
     StringBuilder str = new StringBuilder();
     if (arr.isEmpty()) {
-      str.append("The cage is currently empty, " +
-              "and not housed by any primate troop");
+      str.append("The cage is currently empty, "
+              + "and not housed by any primate troop");
     } else {
-      str.append("Enclosure sign for Cage ").append(CageNo).append('\n');
+      str.append("Enclosure sign for Cage ").append(cageNumber).append('\n');
       for (Primate value : arr) {
-        str.append("Monkey Name: ").append(value.getName()).append('\n').append("Sex: ").
-                append(value.getSex()).append('\n').append("Favorite Food: ").
-                append(value.getFavFood()).append('\n').
-                append("--------------------------").append('\n');
+        str.append("Monkey Name: ").append(value.getName()).append('\n').append("Sex: ")
+                .append(value.getSex()).append('\n').append("Favorite Food: ")
+                .append(value.getFavFood()).append('\n')
+                .append("--------------------------").append('\n');
       }
     }
     return str.toString();
@@ -248,18 +268,19 @@ public class Sanctuary implements SanctuaryInterface {
    * @throws IllegalArgumentException when the given species is not present.
    */
   @Override
-  public Map<String, Map<String, String>> lookUpSpecies(String species) throws IllegalArgumentException {
+  public Map<String, Map<String, String>> lookUpSpecies(String species)
+          throws IllegalArgumentException {
     String[] s = new String[1];
     s[0] = species;
     Map<String, Map<String, String>> lookUpHousing = getHousingOfSpeciesHelper(s);
     if (lookUpHousing.get(species).isEmpty()) {
-      throw new IllegalArgumentException("Report: The species not present in the sanctuary");
+      throw new IllegalArgumentException("Report: The species is not present in the sanctuary");
     }
     return lookUpHousing;
   }
 
   /**
-   * This method is a helper method which provides housing of all the species
+   * This method is a helper method which provides housing of all the species.
    *
    * @param speciesKey this parameter takes the list of species present
    * @return the list of species with housing details.
@@ -310,7 +331,7 @@ public class Sanctuary implements SanctuaryInterface {
   }
 
   /**
-   * This method is a helper method which gives list of total primates in the sanctuary
+   * This method is a helper method which gives list of total primates in the sanctuary.
    *
    * @return total list of primates in enclosure plus isolation.
    */

@@ -1,12 +1,12 @@
 package jungleprimatesanctuary;
 
 /**
- * Class for Howler Species extends Monkey class
+ * Class for Howler Species extends Monkey class.
  */
 public class Howler extends Monkey {
 
-  public Howler(String name, String size, String sex, int age, double weight, String favFood, int foodReq
-          , int spaceReq) {
+  public Howler(String name, String size, String sex, int age, double weight, String favFood,
+                int foodReq, int spaceReq) {
     super(name, size, sex, age, weight, favFood, foodReq, spaceReq);
   }
 

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jungleprimatesanctuary.Food;
-import jungleprimatesanctuary.MonkeyFactory;
 import jungleprimatesanctuary.Sanctuary;
 import jungleprimatesanctuary.SanctuaryInterface;
 import jungleprimatesanctuary.Sex;
@@ -24,7 +23,7 @@ public class SanctuaryTest {
   private final SanctuaryInterface sanctuary;
 
   public SanctuaryTest() {
-    sanctuary = new Sanctuary(new MonkeyFactory(), 7, 4);
+    sanctuary = new Sanctuary(7, 4);
   }
 
   @Before
@@ -46,12 +45,7 @@ public class SanctuaryTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testForNegativeIsolationSize() {
-    new Sanctuary(new MonkeyFactory(), -7, 4);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testForNegativeEnclosureSize() {
-    new Sanctuary(new MonkeyFactory(), 7, -4);
+    new Sanctuary(-7, 4);
   }
 
   /**
@@ -314,6 +308,16 @@ public class SanctuaryTest {
   @Test (expected = IllegalArgumentException.class)
   public void testForUpdateNegativeEnclosureSize() {
     sanctuary.updateHousingSize(7,-2);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testForUpdateDecEnclosureSize() {
+    sanctuary.updateHousingSize(7,3);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testForUpdateDecIsolation() {
+    sanctuary.updateHousingSize(5,4);
   }
 
   @Test

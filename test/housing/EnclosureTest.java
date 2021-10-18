@@ -24,16 +24,17 @@ public class EnclosureTest {
 
   @Before
   public void setUp() throws Exception {
-    p = createPrimateObject("Blim", Size.MEDIUM.getSizeDescription(), Sex.FEMALE.getSex()
-            , 40, 100, Food.EGGS.foodName(), Size.MEDIUM.getFoodQuantity()
-            , Size.MEDIUM.getSpaceRequirement(), "Drill");
+    p = createPrimateObject("Blim", Size.MEDIUM.getSizeDescription(), Sex.FEMALE.getSex(),
+            40, 100, Food.EGGS.foodName(), Size.MEDIUM.getFoodQuantity(),
+            Size.MEDIUM.getSpaceRequirement(), "Drill");
   }
 
   /**
    * Creates a new primate object everytime it is called.
    */
-  protected Primate createPrimateObject(String name, String size, String sex, int age, double weight
-          , String favFood, int foodReq, int spaceReq, String speciesType) {
+  protected Primate createPrimateObject(String name, String size, String sex, int age,
+                                        double weight, String favFood, int foodReq,
+                                        int spaceReq, String speciesType) {
     return monkeyFactory.createMonkey(name, size, sex, age, weight
             , favFood, foodReq, spaceReq, speciesType);
   }
@@ -43,24 +44,31 @@ public class EnclosureTest {
     /* Add primate to empty list. */
     enclosure = new Enclosure(5);
     enclosure.addMonkey(p);
-    assertEquals("Added new primate, check housing type","Enclosure", enclosure.getHousingList().get(0).get(0).getHousing());
-    assertEquals("Added new primate, check cage no.",1, enclosure.getHousingList().get(0).get(0).getHousingNo());
+    assertEquals("Added new primate, check housing type", "Enclosure",
+            enclosure.getHousingList().get(0).get(0).getHousing());
+    assertEquals("Added new primate, check cage no.", 1,
+            enclosure.getHousingList().get(0).get(0).getHousingNo());
 
     /* Add new monkey of the same species to enclosure. */
     p = createPrimateObject("Blake", Size.MEDIUM.getSizeDescription(), Sex.MALE.getSex()
             , 40, 100, Food.FRUITS.foodName(), Size.MEDIUM.getFoodQuantity()
             , Size.MEDIUM.getSpaceRequirement(), "Drill");
     enclosure.addMonkey(p);
-    assertEquals("Added new monkey of same species, check cage no",1, enclosure.getHousingList().get(0).get(1).getHousingNo());
-    assertEquals("Added new monkey of same species, check troop size",2, enclosure.getHousingList().get(0).size());
+    assertEquals("Added new monkey of same species, check cage no", 1,
+            enclosure.getHousingList().get(0).get(1).getHousingNo());
+    assertEquals("Added new monkey of same species, check troop size", 2,
+            enclosure.getHousingList().get(0).size());
 
     /* Add new primate of different species. Check if it gets added to a different cage */
     p = createPrimateObject("Janice", Size.MEDIUM.getSizeDescription(), Sex.FEMALE.getSex()
             , 40, 100, Food.FRUITS.foodName(), Size.MEDIUM.getFoodQuantity()
             , Size.MEDIUM.getSpaceRequirement(), "Howler");
     enclosure.addMonkey(p);
-    assertEquals("Added new monkey of different species, check cage no",2, enclosure.getHousingList().size());
-    assertEquals("Added new monkey of different species, check no of full cages in enclosure list",2, enclosure.getHousingList().get(1).get(0).getHousingNo());
+    assertEquals("Added new monkey of different species, check cage no", 2,
+            enclosure.getHousingList().size());
+    assertEquals("Added new monkey of different species, "
+            + "check no of full cages in enclosure list", 2,
+            enclosure.getHousingList().get(1).get(0).getHousingNo());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -83,26 +91,29 @@ public class EnclosureTest {
 
   @Test
   public void getHousingList() {
-  enclosure.addMonkey(p);
-  assertEquals("Check size of enclosure list after adding a monkey", 1, enclosure.getHousingList().size());
+    enclosure.addMonkey(p);
+    assertEquals("Check size of enclosure list after adding a monkey", 1,
+            enclosure.getHousingList().size());
   }
 
   @Test
   public void removeMonkey() {
     enclosure.addMonkey(p);
-    assertEquals("Check size after adding primate",1,enclosure.getHousingList().size());
+    assertEquals("Check size after adding primate", 1,
+            enclosure.getHousingList().size());
     enclosure.removeMonkey(p);
-    assertEquals("Check size of enclosure after removing primate",true,enclosure.getHousingList().isEmpty());
+    assertEquals("Check size of enclosure after removing primate", true,
+            enclosure.getHousingList().isEmpty());
   }
 
   @Test
   public void getHousingSize() {
-    assertEquals(5,enclosure.getHousingSize());
+    assertEquals(5, enclosure.getHousingSize());
   }
 
   @Test
   public void setHousingSize() {
     enclosure.setHousingSize(10);
-    assertEquals(10,enclosure.getHousingSize());
+    assertEquals(10, enclosure.getHousingSize());
   }
 }

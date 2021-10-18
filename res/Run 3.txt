@@ -1,0 +1,21 @@
+****** Creating a new sanctuary ******
+Sanctuary created with Isolation Size: 2 and Enclosure Size: 2
+Age or weight of the monkey should be a positive number
+Name of the monkey cannot be null
+Age or weight of the monkey should be a positive number
+Unexpected value of the species: abc
+
+****** Alphabetical list of monkey's along with their housing *******
+Name: Jin housing: Isolation Cage No: 1
+
+****** Shopping List of all favorite foods for the sanctuary (Food, Qty) ******
+Food = EGGS, Quantity = 250 gms
+
+****** Alphabetical list of species with housing ******
+Species: Drill | Isolation: Cage No: 1
+
+****** Look Up housing details for a species ******
+Species: Drill | Isolation: Cage No: 1
+
+****** Look Up housing details for species not present ******
+Report: The species is not present in the sanctuary

@@ -8,35 +8,38 @@ import java.util.List;
 public interface Housing {
 
   /**
-   * This method adds a new primate to housing
-   * @param p takes primate object.
-   * @throws IllegalArgumentException
-   * @throws IllegalStateException
+   * This method adds a new primate to housing.
+   *
+   * @param p takes primate object
+   * @throws IllegalArgumentException when an invalid primate is passed
+   * @throws IllegalStateException    when a particular housing is full
    */
-  public void addMonkey(Primate p) throws IllegalStateException, IllegalArgumentException;
+  void addMonkey(Primate p) throws IllegalStateException, IllegalArgumentException;
 
   /**
-   * This method removes a primate object from housing
+   * This method removes a primate object from housing.
+   *
    * @param p takes primate object.
-   * @throws IllegalStateException
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException when an invalid primate object is passed
    */
-  public void removeMonkey(Primate p) throws IllegalStateException, IllegalArgumentException;
+  void removeMonkey(Primate p) throws IllegalArgumentException;
 
   /**
-   * This method provides list of primates in cages of housing
+   * This method provides list of primates in cages of housing.
+   *
    * @return list of primates in all housing cages.
    */
-  public List<List<Primate>> getHousingList();
+  List<List<Primate>> getHousingList();
 
   /**
    * this method provides the size of the housing.
-   * @return
+   *
+   * @return the size of housing.
    */
-  public int getHousingSize();
+  int getHousingSize();
 
   /**
    * this method sets the size of the housing.
    */
-  public void setHousingSize(int m);
+  void setHousingSize(int m);
 }

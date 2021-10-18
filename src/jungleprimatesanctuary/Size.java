@@ -12,7 +12,7 @@ public enum Size {
   private final int spaceRequirement;
   private final int foodQuantity;
 
-  private Size(String sizeDescription, int spaceRequirement, int foodQuantity) {
+  Size(String sizeDescription, int spaceRequirement, int foodQuantity) {
     this.sizeDescription = sizeDescription;
     this.spaceRequirement = spaceRequirement;
     this.foodQuantity = foodQuantity;

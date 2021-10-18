@@ -1,0 +1,26 @@
+------------- Run 2 --------------
+Initial Size of enclosure and isolation: 2 and Enclosure Size: 2
+Update size of sanctuary
+Change size of isolation and enclosure: 3 and Enclosure Size: 3
+Monkey with name Jake created
+Monkey with name Amy created
+
+****** Alphabetical list of monkey's along with their housing *******
+Name: Amy housing: Isolation Cage No: 2
+Name: Danu housing: Isolation Cage No: 3
+Name: Jake housing: Isolation Cage No: 1
+
+Trying to add one more monkey
+No space in isolation
+Change the medical condition of a monkey in isolation to false
+Monkey is already in appropriate housing
+
+****** Enclosure sign for any cage includes Name, Sex, and Favorite food ******
+Enclosure Cage Number entered is not present in the sanctuary
+****** Shopping List of all favorite foods for the sanctuary (Food, Qty) ******
+Food = FRUITS, Quantity = 500 gms
+Food = LEAVES, Quantity = 500 gms
+Food = EGGS, Quantity = 250 gms
+
+****** Look Up housing details for a species ******
+Report: The species is not present in the sanctuary

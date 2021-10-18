@@ -1,0 +1,54 @@
+------------- Run 1 --------------
+****** Creating a new sanctuary ******
+Sanctuary created with Isolation Size: 5 and Enclosure Size: 7
+Monkey with name Blim created
+Monkey with name Bob created
+Monkey with name Chan created
+Monkey with name Lily created
+Monkey with name Lake created
+Can't add monkey, duplicate monkey. Name of a monkey should be unique!
+
+****** Alphabetical list of monkey's along with their housing *******
+Name: Blim housing: Isolation Cage No: 1
+Name: Bob housing: Isolation Cage No: 2
+Name: Chan housing: Isolation Cage No: 3
+Name: Lake housing: Isolation Cage No: 5
+Name: Lily housing: Isolation Cage No: 4
+
+Medical condition of Bob changed to true
+Medical condition of Lily changed to true
+Medical condition of Lake changed to true
+
+****** Alphabetical list of monkey's along with their housing *******
+Name: Blim housing: Isolation Cage No: 1
+Name: Bob housing: Enclosure Cage No: 1
+Name: Chan housing: Isolation Cage No: 3
+Name: Lake housing: Enclosure Cage No: 2
+Name: Lily housing: Enclosure Cage No: 2
+
+
+****** Enclosure sign for any cage includes Name, Sex, and Favorite food ******
+Enclosure sign for Cage 1
+Monkey Name: Lily
+Sex: FEMALE
+Favorite Food: INSECTS
+--------------------------
+Monkey Name: Lake
+Sex: MALE
+Favorite Food: LEAVES
+--------------------------
+
+****** Shopping List of all favorite foods for the sanctuary (Food, Qty) ******
+Food = FRUITS, Quantity = 500 gms
+Food = NUTS, Quantity = 250 gms
+Food = LEAVES, Quantity = 500 gms
+Food = INSECTS, Quantity = 100 gms
+Food = EGGS, Quantity = 250 gms
+
+****** Alphabetical list of species with housing ******
+Species: Drill | Isolation: Cage No: 1
+Species: Mangabey | Enclosure: Cage No: 2
+Species: Spider | Isolation: Cage No: 3 Enclosure: Cage No: 1
+
+****** Look Up housing details for a species ******
+Species: Mangabey | Enclosure: Cage No: 2

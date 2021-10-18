@@ -7,75 +7,85 @@ package jungleprimatesanctuary;
  */
 public interface Primate {
 
-  public String getName();
+  String getName();
 
   /**
    * * Get the size of each individual monkey.
+   *
    * @return the monkey size.
    */
-  public String getSize();
+  String getSize();
 
   /**
    * * Get the sex of each individual monkey.
+   *
    * @return the monkey sex.
    */
-  public String getSex();
+  String getSex();
 
   /**
    * * Get the age of each individual monkey.
+   *
    * @return the monkey age.
    */
-  public int getAge();
+  int getAge();
 
   /**
    * * Get the weight of each individual monkey.
+   *
    * @return the monkey weight.
    */
-  public double getWeight();
+  double getWeight();
 
   /**
    * * Get the favorite food of each individual monkey.
+   *
    * @return the monkey favorite food.
    */
-  public String getFavFood();
+  String getFavFood();
 
   /**
    * * Get the species of each individual monkey.
+   *
    * @return the species of the monkey.
    */
-  public String getSpecies();
+  String getSpecies();
 
   /**
    * * Get the space requirement of each individual monkey.
+   *
    * @return the space requirement of the monkey.
    */
-  public int getSpaceReq();
+  int getSpaceReq();
 
   /**
    * * Get the food requirement of each individual monkey.
+   *
    * @return the space requirement of the monkey.
    */
-  public int getFoodReq();
+  int getFoodReq();
 
   /**
    * * Get the housing of each individual monkey.
+   *
    * @return housing type.
    */
- public String getHousing();
+  String getHousing();
 
   /**
    * * Set the housing of each individual monkey.
    */
-  public void setHousing(String housing);
+  void setHousing(String housing);
 
   /**
    * * Get the housing of each individual monkey.
+   *
    * @return housing type.
    */
-  public int getHousingNo();
+  int getHousingNo();
 
   /**
    * * Set the housing of each individual monkey.
    */
-  public void setHousingNo(int housingNo);
+  void setHousingNo(int housingNo);
 }

@@ -10,10 +10,10 @@ public class Enclosure implements Housing {
 
   private final int enclosureSize = 100; /* every enclosure is of fixed size 100 sq.m */
   private final List<List<Primate>> enclosureList = new ArrayList<>();
-  private int m;
+  private int noOfEnclosure;
 
   public Enclosure(int m) {
-    this.m = m;
+    this.noOfEnclosure = m;
   }
 
   /**
@@ -57,7 +57,7 @@ public class Enclosure implements Housing {
       throw new IllegalArgumentException("No primate Object passed");
     }
     int troopNo = checkAvailability(p.getSpecies(), p.getSpaceReq());
-    if (troopNo >= m) {
+    if (troopNo >= noOfEnclosure) {
       throw new IllegalStateException("No space in Enclosure, please check other sanctuaries");
     } else {
       if (getHousingList().isEmpty() || getHousingList().size() == troopNo) {
@@ -85,18 +85,17 @@ public class Enclosure implements Housing {
    */
   @Override
   public void removeMonkey(Primate p) {
-    if(p==null) {
+    if (p == null) {
       throw new IllegalArgumentException("primate object is null, not a valid argument.");
     }
     if (!enclosureList.isEmpty()) {
       for (int i = 0; i < enclosureList.size(); i++) {
         for (int j = 0; j < enclosureList.get(i).size(); j++) {
           if (enclosureList.get(i).get(j).getName().equals(p.getName())) {
-            if(enclosureList.get(i).size()<=1) {
+            if (enclosureList.get(i).size() <= 1) {
               enclosureList.remove(enclosureList.get(i));
               break;
-            }
-            else {
+            } else {
               enclosureList.get(i).remove(enclosureList.get(i).get(j));
               break;
             }
@@ -111,15 +110,14 @@ public class Enclosure implements Housing {
    */
   @Override
   public int getHousingSize() {
-    return m;
+    return noOfEnclosure;
   }
 
   /**
-   *
    * {@inheritDoc}
    */
   @Override
   public void setHousingSize(int m) {
-    this.m = m;
+    this.noOfEnclosure = m;
   }
 }

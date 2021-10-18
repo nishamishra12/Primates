@@ -22,12 +22,14 @@ public interface SanctuaryInterface {
    * @param speciesType this parameter takes the species type of the monkey
    * @throws IllegalArgumentException when a newly added monkey has name same as a
    *                                  monkey already present in the sanctuary
+   * @throws IllegalStateException    when there is no space in isolation and a new monkey is added.
    */
-  void createNewPrimate(String name, String size, String sex, int age, double weight
-          , String favFood, int foodReq, int spaceReq, String speciesType) throws IllegalArgumentException;
+  void createNewPrimate(String name, String size, String sex, int age, double weight,
+                        String favFood, int foodReq, int spaceReq, String speciesType)
+          throws IllegalArgumentException, IllegalStateException;
 
   /**
-   * This method changes the medical condition of the monkey and calls the shift method
+   * This method changes the medical condition of the monkey and calls the shift method.
    * to shift the monkey to appropriate housing based on medical condition
    *
    * @param name        this parameter takes the name of the monkey
@@ -36,7 +38,7 @@ public interface SanctuaryInterface {
    * @throws IllegalStateException    when a monkey is already present in appropriate housing
    * @throws IllegalArgumentException when a monkey is not present in the sanctuary.
    */
-  public void changeMedicalConditionOfMonkey(String name, boolean medicalFlag)
+  void changeMedicalConditionOfMonkey(String name, boolean medicalFlag)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
@@ -44,66 +46,75 @@ public interface SanctuaryInterface {
    *
    * @return list of primates housed in the sanctuary
    */
-  public List<Primate> getAlphabeticalListOfMonkeys();
+  List<Primate> getAlphabeticalListOfMonkeys();
 
   /**
    * This method provides the enclosure sign for each individual primate
    * details for an enclosure cage consisting of name, sex, and favorite food of the primate.
    *
-   * @param CageNo this parameter takes the cage no of the enclosure
-   *               for which the enclosure sign is required.
+   * @param cageNumber this parameter takes the cage no of the enclosure
+   *                   for which the enclosure sign is required.
    * @return the enclosure sign for all the primates in the enclosure cage
    * @throws IllegalArgumentException when the cage number entered is not present in the enclosure
    */
-  public String getEnclosureSign(int CageNo) throws IllegalArgumentException;
+  String getEnclosureSign(int cageNumber) throws IllegalArgumentException;
 
   /**
    * This method provides a shopping list of the favorite foods of the primates
    * along with the quantity required.
+   *
    * @return favorite food and quantity of all the favorite foods.
    */
-  public Map<String, Integer> getShoppingList();
+  Map<String, Integer> getShoppingList();
 
   /**
    * This method provides the list of all species in the sanctuary in alphabetical order
    * along with their respective housing.
+   *
    * @return alphabetical list of the species.
    */
-  public Map<String, Map<String, String>> getAlphabeticalSpeciesList();
+  Map<String, Map<String, String>> getAlphabeticalSpeciesList();
 
   /**
    * This method looks up a particular species and provides the housing details for that species.
+   *
    * @param species this parameter takes the species name
    * @return the list of species along with housing details and cage numbers
    * @throws IllegalArgumentException when the given species is not present.
    */
-  public Map<String, Map<String, String>> lookUpSpecies(String species) throws IllegalArgumentException;
+  Map<String, Map<String, String>> lookUpSpecies(String species)
+          throws IllegalArgumentException;
 
   /**
    * This method provides the entire primate object for any monkey by the monkey name.
+   *
    * @param name this parameter takes the name of the monkey
    * @return primate object for a unique monkey name.
    * @throws IllegalArgumentException when name entered is not present in the sanctuary.
    */
-  public Primate findMonkey(String name) throws IllegalArgumentException;
+  Primate findMonkey(String name) throws IllegalArgumentException;
 
   /**
-   * This method updates the size of enclosure and isolation
+   * This method updates the size of enclosure and isolation.
+   *
    * @param isolationSize takes isolation size
-   * @param enclosureSize
+   * @param enclosureSize takes enclosure size
    * @throws IllegalArgumentException when a non-positive number is entered as housing size
    */
-  public void updateHousingSize(int isolationSize, int enclosureSize) throws IllegalArgumentException;
+  void updateHousingSize(int isolationSize, int enclosureSize)
+          throws IllegalArgumentException;
 
   /**
-   * This method returns isolation housing object
+   * This method gives isolation housing object.
+   *
    * @return housing object
    */
-  public Housing getIsolation();
+  Housing getIsolation();
 
   /**
-   * This method returns enclosure housing object
+   * This method gives enclosure housing object.
+   *
    * @return housing object
    */
-  public Housing getEnclosure();
+  Housing getEnclosure();
 }
